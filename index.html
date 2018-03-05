@@ -10,11 +10,13 @@
 </head>
 
 <body>
-    <button onclick="getData()">获取数据</button>
+    <button onclick="getData2()">获取端口数据2</button>
+    <button onclick="getData3()">获取端口数据3</button>
     <div id="myDiv"></div>
     <script>
         var xmlReq = null;
-        function getData() {
+
+        function getData2() {
             if (window.XMLHttpRequest) {
                 //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
                 xmlReq = new XMLHttpRequest();
@@ -24,14 +26,17 @@
             }
             xmlReq.onreadystatechange = function () {
                 if (xmlReq.readyState == 4 && xmlReq.status == 200) {
-                    document.getElementById("myDiv").innerHTML = xmlReq.responseText;
+                    $('#myDiv').html(xmlReq.responseText);
                 }
             }
-            xmlReq.open('get', 'http://127.0.0.1:8003/data.html', true);
+            xmlReq.open('get', 'http://127.0.0.1:8002', true);
             xmlReq.send();
-            // $.ajax('127.0.0.1:8002', function (data, status) {
-            //     $('#myDIv').html(data + '!!!' + status);
-            // })
+        }
+
+        function getData3() {
+            $.get('http://127.0.0.1:8003', function (data, status) {
+                $('#myDiv').html(data + '!!!' + status);
+            });
         }
     </script>
 </body>
